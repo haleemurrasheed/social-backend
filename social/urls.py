@@ -1,7 +1,13 @@
+from django.http import JsonResponse
 from django.urls import path
 from . import views
 
+def health_check(request):
+    return JsonResponse({'status': 'ok'})
+
 urlpatterns = [
+    path('health/', health_check),
+    # ... rest of your urls
     path('register/', views.user_register),
     path('login/', views.user_login),
     path('posts/', views.post_list),

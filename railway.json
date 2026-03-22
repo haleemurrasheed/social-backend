@@ -4,8 +4,9 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python manage.py migrate && gunicorn social_backend.wsgi --log-file -",
-    "healthcheckPath": "/api/posts/",
+    "startCommand": "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn social_backend.wsgi --log-file - --bind 0.0.0.0:$PORT",
+    "healthcheckPath": "/api/health/",
+
     "restartPolicyType": "ON_FAILURE"
   }
 }
